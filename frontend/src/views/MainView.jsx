@@ -35,10 +35,10 @@ export const MainView = () => {
 
   const {
     data: ghData,
-    isPending,
-    isError,
-    isPlaceholderData,
     error,
+    isError,
+    isPending,
+    isPlaceholderData,
   } = useFetchData(
     `/search/repositories?q=created:>2024-11-30&sort=stars&order=desc&per_page=10&page=${page}`,
     "ghData",
@@ -46,7 +46,11 @@ export const MainView = () => {
   );
 
   if (isError) {
-    return <div>Erreur de chargement : {error.message}</div>;
+    if (error.status === 403) {
+      alert("Limite de requête excédée, veuillez reesayez plus tard.");
+    } else {
+      return <div>Erreur de chargement : {error.message}</div>;
+    }
   }
 
   if (isPending) {
@@ -63,11 +67,7 @@ export const MainView = () => {
     }
   };
 
-  const filteredData = language
-    ? ghData?.items.filter(
-        (repo) => repo.language?.toLowerCase() === language.toLowerCase()
-      )
-    : ghData?.items;
+  const filteredData = applyFilter(ghData?.items, "language", language);
 
   return (
     <div className="space-y-4 w-full">

@@ -31,7 +31,9 @@ export const columns = [
       </div>
     ),
     cell: ({ row }) => (
-      <div className="text-center w-60">{row.original.description || "_"}</div>
+      <div className="text-center text-balance w-60">
+        {row.original.description || "_"}
+      </div>
     ),
   },
   {
@@ -41,14 +43,16 @@ export const columns = [
     ),
     cell: ({ row }) => (
       <div className="text-center text-sm text-muted-foreground">
-        {row.original.language}
+        {row.original.language || "_"}
       </div>
     ),
   },
   {
     accessorKey: "stars",
     header: () => (
-      <div className="flex mx-auto font-semibold text-black">Nbr d'étoiles</div>
+      <div className="flex mx-auto font-semibold text-black">
+        Nombre d'étoiles
+      </div>
     ),
     cell: ({ row }) => (
       <div className="text-center text-sm text-muted-foreground">

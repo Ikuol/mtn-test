@@ -62,7 +62,6 @@ export const MyTable = ({
   const currentPage = table.getState().pagination.pageIndex + 1;
   const totalElements = data.length;
 
-  // Calcul précis du nombre d'éléments actuels
   const currentElements = Math.min(currentPage * pageSize, totalElements);
 
   return (
@@ -74,18 +73,11 @@ export const MyTable = ({
               {headerGroup.headers.map((header) => (
                 <TableHead key={header.id}>
                   {header.isPlaceholder ? null : (
-                    <div
-                      className={`cursor-pointer flex items-center`}
-                      onClick={header.column.getToggleSortingHandler()}
-                    >
+                    <div className={`flex items-center`}>
                       {flexRender(
                         header.column.columnDef.header,
                         header.getContext()
                       )}
-                      {{
-                        asc: " 🔼",
-                        desc: " 🔽",
-                      }[header.column.getIsSorted()] ?? null}
                     </div>
                   )}
                 </TableHead>
@@ -97,10 +89,6 @@ export const MyTable = ({
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
-                className="cursor-pointer"
-                onClick={() =>
-                  navigate(getRedirectedUrl(location, row.original.symbol))
-                }
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
               >
