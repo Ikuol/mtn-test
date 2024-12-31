@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scrollbar-width: none;
+  }
+
+  body {
+    font-family: "Poppins", sans-serif !important;
+    -ms-overflow-style: none;
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+  }
+}
